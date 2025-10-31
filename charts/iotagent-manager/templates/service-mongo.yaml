@@ -1,0 +1,26 @@
+{{- if .Values.mongo.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "iotagent-manager.fullname" . }}-mongo
+  namespace: {{ $.Release.Namespace | quote }}
+  {{- if .Values.service.annotations }}
+  annotations:
+    {{ toYaml .Values.service.annotations | nindent 4 }}
+  {{- end }}
+  labels:
+    app.kubernetes.io/name: {{ include "iotagent-manager.name" . }}-mongo
+    helm.sh/chart: {{ include "iotagent-manager.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.mongo.port }}
+      targetPort: {{ .Values.mongo.port }}
+      protocol: TCP
+      name: mongo
+  selector:
+    app.kubernetes.io/name: {{ include "iotagent-manager.name" . }}-mongo
+    app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}

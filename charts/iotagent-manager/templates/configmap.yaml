@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app: {{ template "iotagent-manager.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+    heritage: {{ .Release.Service }}
+    release: {{ .Release.Name }}
+  name: {{ template "iotagent-manager.fullname" . }}
+data:
+  config.js: |
+
+    var config = {
+        server: {
+            host: "0.0.0.0",
+            port: {{ required "A valid service.internalPort is required" .Values.service.internalPort }}
+        },
+        mongodb: {
+            host: {{ include "iotagent-manager.fullname" . }}-mongo,
+            port: {{ required "A valid mongo.dbport is required" .Values.mongo.port }},
+            db: {{ required "A valid mongo.dbname is required" .Values.mongo.dbname | quote }},
+            {{ if .Values.mongo.rsEnabled -}}replicaSet: {{ .Values.mongo.rs | quote }},{{- end }}
+            retries: 5,
+            retryTime: 5
+        },
+        logLevel: {{ required "A valid service.logLevel is required" .Values.service.logLevel | quote }}
+    };
+
+    module.exports = config;
