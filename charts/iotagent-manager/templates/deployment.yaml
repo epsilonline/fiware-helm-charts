@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "iotagent-manager.fullname" . }}
+  labels:
+    app: {{ include "iotagent-manager.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "iotagent-manager.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "iotagent-manager.name" . }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ include "iotagent-manager.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.service.internalPort }}
+          livenessProbe:
+            httpGet:
+              path: /iot/about
+              port: {{ .Values.service.internalPort }}
+          readinessProbe:
+            httpGet:
+              path: /iot/about
+              port: {{ .Values.service.internalPort }}
+          env:
+            - name: LOG_LEVEL
+              value: {{ .Values.logLevel | quote }}
+            - name: IOTA_MONGO_URI
+              value: "mongodb://iotagent-manager-mongo:27017/iotagent-manager"
