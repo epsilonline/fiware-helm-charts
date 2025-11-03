@@ -1,0 +1,16 @@
+apiVersion: v2
+name: iotagent-manager
+version: 0.0.1
+appVersion: 3.9.0
+home: https://fiware-iotagent-manager.readthedocs.io/en/latest/
+description: A Helm chart for running the fiware iotagent-manager on kubernetes.
+type: application
+icon: https://fiware.github.io/catalogue/img/fiware.png
+keywords:
+  - fiware
+  - iot-agent
+sources:
+  - https://github.com/telefonicaid/iotagent-manager
+maintainers:
+  - name: Nicola Apa
+    email: nicola.apa@epsilonline.com

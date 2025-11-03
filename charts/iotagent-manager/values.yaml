@@ -1,0 +1,41 @@
+replicaCount: 1
+
+image:
+  repository: telefonicaiot/iotagent-manager
+  tag: 3.9.0
+
+service:
+  name: iotagentmanager
+  type: ClusterIP
+  # log level supported: DEBUG, INFO, ERROR, FATAL.
+  logLevel: DEBUG
+  #
+  externalPort: 8082
+  internalPort: 8082
+
+logLevel: DEBUG
+
+ingress:
+  enabled: false
+  hosts:
+    - iot-manager.epsilonlab.internal
+  annotations:
+    cert-manager.io/cluster-issuer: vault-issuer
+  tls: {}
+
+mongo:
+  # -- should mongodb be enabled
+  enabled: true
+  ## configuration for the mongo image to be used
+  image:
+    # -- pull policy to be used for mongo
+    pullPolicy: IfNotPresent
+    # -- mongo image name
+    repository: quay.io/opencloudio/ibm-mongodb
+    # -- version of mongo
+    tag: 4.0.24
+  # -- port to make mongo accessible at
+  port: 27017
+  dbname: iotagent-manager
+  rsEnabled: false
+  # rs: rs
