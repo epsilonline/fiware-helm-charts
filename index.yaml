@@ -3941,6 +3941,27 @@ entries:
     urls:
     - https://github.com/FIWARE/helm-charts/releases/download/iotagent-json-0.0.1/iotagent-json-0.0.1.tgz
     version: 0.0.1
+  iotagent-manager:
+  - apiVersion: v2
+    appVersion: 3.9.0
+    created: "2025-11-03T14:32:28.165348251Z"
+    description: A Helm chart for running the fiware iotagent-manager on kubernetes.
+    digest: 048a98d80aa9ca2021d73c8d3355302c9b4b70b24673cf99c908a643df4edca1
+    home: https://fiware-iotagent-manager.readthedocs.io/en/latest/
+    icon: https://fiware.github.io/catalogue/img/fiware.png
+    keywords:
+    - fiware
+    - iot-agent
+    maintainers:
+    - email: nicola.apa@epsilonline.com
+      name: Nicola Apa
+    name: iotagent-manager
+    sources:
+    - https://github.com/telefonicaid/iotagent-manager
+    type: application
+    urls:
+    - https://github.com/epsilonline/fiware-helm-charts/releases/download/iotagent-manager-0.0.1/iotagent-manager-0.0.1.tgz
+    version: 0.0.1
   iotagent-ul:
   - apiVersion: v1
     appVersion: 1.14.0
@@ -8787,4 +8808,4 @@ entries:
     urls:
     - https://github.com/FIWARE/helm-charts/releases/download/vcverifier-2.3.0/vcverifier-2.3.0.tgz
     version: 2.3.0
-generated: "2025-10-14T11:00:13.223819442Z"
+generated: "2025-11-03T14:32:28.406495531Z"
