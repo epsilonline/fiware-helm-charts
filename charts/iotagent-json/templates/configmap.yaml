@@ -226,7 +226,7 @@ data:
          * Default resource of the IoT Agent. This value must be different for every IoT Agent connecting to the IoT
          * Manager.
          */
-        {{- if .Values.iotManager.defaultResource -}}
+        {{ if .Values.iotManager.defaultResource -}}
         defaultResource: '{{ .Values.iotManager.defaultResource }}',
         {{- else -}}
         defaultResource: '/iot/{{ randAlphaNum 10 }}',
