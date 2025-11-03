@@ -38,4 +38,3 @@ mongo:
   port: 27017
   dbname: iotagent-manager
   rsEnabled: false
-  # rs: rs
