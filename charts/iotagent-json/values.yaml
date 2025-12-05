@@ -217,36 +217,36 @@ ingress:
       # - iota-json.fiware.org
 
 ## configuration of the mqtt binding
-# mqtt:
-  ## configuration for the used mqtt broker
-  # broker:
-    ## mqtt broker host
-    # host: localhost
-    ## mqtt broker port
-    # port: 1883
-    ## protocol to use for connecting with the MQTT broker
+mqtt:
+  # configuration for the used mqtt broker
+  broker:
+    # mqtt broker host
+    host: localhost
+    # mqtt broker port
+    port: 1883
+    # protocol to use for connecting with the MQTT broker
     # one of `mqtt`, `mqtts`, `tcp`, `tls`, `ws`, `wss`
-    # protocol: mqtt
-    ## authentication configuration for the broker, if required
-    # auth:
-      # username: username
-      # password: password
-  ## configuration of certificates to be used with mqtt
-  # certs:
-    ## if set, only validated certificates are accepted
-    # rejectUnauthorized: true
-  ## MQTT Quality of Service configuration
-  # qos: 0
-  ## Retain flag
-  # retain: false
-  ## Number of MQTT connection error retries
-  # retryNumber: 5
-  ##Time between MQTT connection retries in seconds
-  # retryTime: 0
-  ## Time to keep connection open between client and MQTT broker in seconds
-  # keepAlive: 0
-  ## Whether to use slashes at the beginning of topic when sending or not
-  # avoidLeadingSlash: false
+    protocol: mqtt
+    # authentication configuration for the broker, if required
+    auth:
+      username: username
+      password: password
+  # configuration of certificates to be used with mqtt
+  certs:
+    # if set, only validated certificates are accepted
+    rejectUnauthorized: true
+  # MQTT Quality of Service configuration
+  qos: 0
+  # Retain flag
+  retain: false
+  # Number of MQTT connection error retries
+  retryNumber: 5
+  #Time between MQTT connection retries in seconds
+  retryTime: 0
+  # Time to keep connection open between client and MQTT broker in seconds
+  keepAlive: 0
+  # Whether to use slashes at the beginning of topic when sending or not
+  avoidLeadingSlash: false
 
 ## configuration of the amqp binding
 # amqp:
@@ -337,31 +337,48 @@ iota:
 ## coordinated by an IoT Manager, this section defines the information that will be used to connect with that
 ## manager.
 ## ref: https://github.com/telefonicaid/iotagent-manager
-# iotManager:
-  ## host of the iot manager
-  # host: localhost
-  ## port of the iot manager
-  # port: 8082
-  ## path where the manager accepts subscriptions
-  # path: /protocols
-  ## Protocol code identifying this IoT Agent
-  # protocolCode: MQTT_UL
-  ## Default resource of the IoT Agent. This value must be different for every IoT Agent connecting to the IoT
-  ## Manager. If unset, helm will generate a random one.
-  # defaultResource: /iot/d
+iotManager:
+  # host of the iot manager
+  host: localhost
+  # port of the iot manager
+  port: 8082
+  # path where the manager accepts subscriptions
+  path: /protocols
+  # Protocol code identifying this IoT Agent
+  protocolCode: MQTT_UL
+  # Default resource of the IoT Agent. This value must be different for every IoT Agent connecting to the IoT
+  # Manager. If unset, helm will generate a random one.
+  defaultResource: /iot/d
 
 ## configuration for the Device Registry, where all the information about devices and configuration groups will be
 ## stored
 deviceRegistry:
   # -- type of the registry, currently 'memory'(wiped on restart) and 'mongodb' are supported
-  type: memory
-  ## configuration of the mongoDb if used
-  ##mongoDb:
-     ## host of the mongodb
-     ## host: localhost
-     ## port of the mongodb
-     ##port: 27017
-     ## name of the db used
-     ##dbName: iotagentul
-    ## name of the replicaset, if used
-    ## replicaSet: dr
+  type: mongodb
+  # configuration of the mongoDb if used
+  mongoDb:
+    # host of the mongodb
+    host: localhost
+    # port of the mongodb
+    port: 27017
+    # name of the db used
+    dbName: iotagentul
+    # name of the replicaset, if used
+    # replicaSet: dr
+
+
+mongo:
+  # -- should mongodb be enabled
+  enabled: false
+  ## configuration for the mongo image to be used
+  image:
+    # -- pull policy to be used for mongo
+    pullPolicy: IfNotPresent
+    # -- mongo image name
+    repository: quay.io/opencloudio/ibm-mongodb
+    # -- version of mongo
+    tag: 4.0.24
+  # -- port to make mongo accessible at
+  port: 27017
+  dbname: iotagent-json
+  rsEnabled: false

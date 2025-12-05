@@ -94,6 +94,10 @@ spec:
                   key: clientSecret
             {{- end }}
             {{- end }}
+            - name: IOTA_MQTT_HOST
+              value: "mosquitto.chirpstack.svc.cluster.local"
+            - name: IOTA_MQTT_PORT
+              value: "1883"
           resources:
             {{- toYaml .Values.deployment.resources | nindent 12 }}
           volumeMounts:
