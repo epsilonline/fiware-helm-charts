@@ -228,9 +228,9 @@ mqtt:
     # one of `mqtt`, `mqtts`, `tcp`, `tls`, `ws`, `wss`
     protocol: mqtt
     # authentication configuration for the broker, if required
-    auth:
-      username: username
-      password: password
+    # auth:
+    #   username: username
+    #   password: password
   # configuration of certificates to be used with mqtt
   certs:
     # if set, only validated certificates are accepted
