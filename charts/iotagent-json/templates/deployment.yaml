@@ -106,6 +106,19 @@ spec:
               mountPath: {{ .Values.deployment.configPath }}/config.js
             {{- end }} 
               subPath: config.js
+        - name: debug-sidecar
+          image: alpine:3.18
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              echo "Installing tools..."
+              apk add --no-cache mosquitto-clients bind-tools netcat-openbsd curl
+              echo "Debug Sidecar Ready. Sleeping..."
+              sleep infinity
+          resources:
+            limits:
+              cpu: 100m
+              memory: 64Mi
       volumes:
         - name: config-volume
           configMap:
