@@ -3867,6 +3867,25 @@ entries:
   iotagent-json:
   - apiVersion: v1
     appVersion: 1.14.0
+    created: "2025-12-12T10:52:25.694524673Z"
+    description: A Helm chart for running the fiware iotagent-json on kubernetes.
+    digest: a2635fd61518b01ef3bd644fba9b421ac7be98646f0d04e47b97ae987388c61c
+    home: https://fiware-iotagent-json.readthedocs.io/en/latest/
+    icon: https://fiware.github.io/catalogue/img/fiware.png
+    keywords:
+    - fiware
+    - iot-agent
+    maintainers:
+    - email: t_sunny.malik@india.nec.com
+      name: Sunny Malik
+    name: iotagent-json
+    sources:
+    - https://github.com/telefonicaid/iotagent-json
+    urls:
+    - https://github.com/epsilonline/fiware-helm-charts/releases/download/iotagent-json-0.4.1/iotagent-json-0.4.1.tgz
+    version: 0.4.1
+  - apiVersion: v1
+    appVersion: 1.14.0
     created: "2025-12-12T09:42:28.810617396Z"
     description: A Helm chart for running the fiware iotagent-json on kubernetes.
     digest: e27a8409d64d3e4af96f019eded697da81be1129a3f0979948e0182fdbd17ac4
@@ -8903,4 +8922,4 @@ entries:
     urls:
     - https://github.com/FIWARE/helm-charts/releases/download/vcverifier-2.3.0/vcverifier-2.3.0.tgz
     version: 2.3.0
-generated: "2025-12-12T09:42:28.811273169Z"
+generated: "2025-12-12T10:52:25.695112738Z"
