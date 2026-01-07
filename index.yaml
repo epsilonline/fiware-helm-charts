@@ -4055,6 +4055,17 @@ entries:
     urls:
     - https://github.com/FIWARE/helm-charts/releases/download/iotagent-json-0.0.1/iotagent-json-0.0.1.tgz
     version: 0.0.1
+  iotagent-lorawan:
+  - apiVersion: v2
+    appVersion: 1.2.5
+    created: "2026-01-07T09:05:39.49181635Z"
+    description: FIWARE IoT Agent for LoRaWAN (ChirpStack integration)
+    digest: 0f55e78f6fe6408de354ba9a9b21b3d5dd3e222578ca6d7ea558058aa25076e3
+    name: iotagent-lorawan
+    type: application
+    urls:
+    - https://github.com/epsilonline/fiware-helm-charts/releases/download/iotagent-lorawan-0.1.0/iotagent-lorawan-0.1.0.tgz
+    version: 0.1.0
   iotagent-manager:
   - apiVersion: v2
     appVersion: 3.9.0
@@ -8922,4 +8933,4 @@ entries:
     urls:
     - https://github.com/FIWARE/helm-charts/releases/download/vcverifier-2.3.0/vcverifier-2.3.0.tgz
     version: 2.3.0
-generated: "2025-12-12T10:52:25.695112738Z"
+generated: "2026-01-07T09:05:39.492585634Z"
