@@ -1,43 +1,34 @@
-# Immagine Docker ufficiale
 image:
   repository: fiware/iotagent-lorawan
   tag: 1.2.5
   pullPolicy: IfNotPresent
 
-# Configurazione del Servizio (Porta di gestione HTTP)
 service:
   type: ClusterIP
   port: 4061
 
-# Connessione al Context Broker (Orion)
 orion:
-  host: "orion" # Nome del servizio di Orion nello stesso namespace
+  host: "orion"
   port: 1026
+  ngsiVersion: "v2" # o "ld" se usi Scorpio/Orion-LD
 
-# Connessione a MongoDB (Per salvare i device)
 mongo:
-  host: "mongodb" # Nome del servizio Mongo
+  host: "mongodb"
   port: 27017
   db: "iotagent_lorawan"
 
-# Connessione a ChirpStack (via MQTT)
-# Questo è fondamentale: l'Agent si sottoscrive a Mosquitto per ricevere i dati
 mqtt:
-  host: "mosquitto.chirpstack.svc.cluster.local" # FQDN verso il namespace chirpstack
+  host: "mosquitto.chirpstack.svc.cluster.local"
   port: 1883
-  username: "" # Se il tuo mosquitto ha auth, mettila qui
+  username: "" 
   password: ""
 
-# Configurazioni specifiche dell'Agent
 agent:
-  # Il protocollo che usa internamente (lascia PDI-IoTA-UltraLight o PDI-IoTA-JSON)
-  protocol: "PDI-IoTA-JSON"
-  # Log level (DEBUG è utile all'inizio)
   logLevel: "DEBUG"
-  # Provider URL: Come Orion contatta questo Agent (per i comandi downlink)
-  providerUrl: "http://iotagent-lorawan:4061"
+  # URL con cui Orion contatta l'Agent (il nome del servizio K8s)
+  providerUrl: "http://iotagent-lorawan:4061" 
+  defaultResource: "/iot/d"
 
-# Risorse (CPU/RAM)
 resources:
   limits:
     cpu: 200m

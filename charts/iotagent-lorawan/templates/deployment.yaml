@@ -17,46 +17,18 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.port }}
-          env:
-            # --- Configurazione ORION ---
-            - name: IOTA_CB_HOST
-              value: "{{ .Values.orion.host }}"
-            - name: IOTA_CB_PORT
-              value: "{{ .Values.orion.port }}"
-            
-            # --- Configurazione MONGO ---
-            - name: IOTA_MONGO_HOST
-              value: "{{ .Values.mongo.host }}"
-            - name: IOTA_MONGO_PORT
-              value: "{{ .Values.mongo.port }}"
-            - name: IOTA_MONGO_DB
-              value: "{{ .Values.mongo.db }}"
-
-            # --- Configurazione SERVER (Se stesso) ---
-            - name: IOTA_HTTP_PORT
-              value: "{{ .Values.service.port }}"
-            - name: IOTA_PROVIDER_URL
-              value: "{{ .Values.agent.providerUrl }}"
-            - name: IOTA_LOG_LEVEL
-              value: "{{ .Values.agent.logLevel }}"
-
-            # --- Configurazione MQTT (Bridge verso ChirpStack) ---
-            - name: IOTA_MQTT_HOST
-              value: "{{ .Values.mqtt.host }}"
-            - name: IOTA_MQTT_PORT
-              value: "{{ .Values.mqtt.port }}"
-            # Opzionali (se servono user/pass)
-            {{- if .Values.mqtt.username }}
-            - name: IOTA_MQTT_USER
-              value: "{{ .Values.mqtt.username }}"
-            {{- end }}
-            {{- if .Values.mqtt.password }}
-            - name: IOTA_MQTT_PASSWORD
-              value: "{{ .Values.mqtt.password }}"
-            {{- end }}
-
+          
+          volumeMounts:
+            - name: config-volume
+              mountPath: /opt/iotagent-lora/config.js
+              subPath: config.js
+              
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+            
+      volumes:
+        - name: config-volume
+          configMap:
+            name: {{ .Chart.Name }}-config

@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}-config
+  labels:
+    app: {{ .Chart.Name }}
+data:
+  config.js: |
+    var config = {};
+
+    config.iota = {
+        logLevel: '{{ .Values.agent.logLevel }}',
+        timestamp: true,
+        contextBroker: {
+            host: '{{ .Values.orion.host }}',
+            port: '{{ .Values.orion.port }}',
+            ngsiVersion: '{{ .Values.orion.ngsiVersion }}'
+        },
+        server: {
+            port: {{ .Values.service.port }}
+        },
+        defaultResource: '{{ .Values.agent.defaultResource }}',
+        deviceRegistry: {
+            type: 'mongodb'
+        },
+        mongodb: {
+            host: '{{ .Values.mongo.host }}',
+            port: '{{ .Values.mongo.port }}',
+            db: '{{ .Values.mongo.db }}'
+        },
+        types: {},
+        service: 'openiot',
+        subservice: '/',
+        providerUrl: '{{ .Values.agent.providerUrl }}',
+        deviceRegistrationDuration: 'P1Y',
+        defaultType: 'Thing',
+        explicitAttrs: true
+    };
+
+    // --- CONFIGURAZIONE MQTT (Aggiunta per ChirpStack) ---
+    config.mqtt = {
+        host: '{{ .Values.mqtt.host }}',
+        port: {{ .Values.mqtt.port }},
+        protocol: 'mqtt',
+        {{- if .Values.mqtt.username }}
+        username: '{{ .Values.mqtt.username }}',
+        {{- end }}
+        {{- if .Values.mqtt.password }}
+        password: '{{ .Values.mqtt.password }}',
+        {{- end }}
+        rejectUnauthorized: false
+    };
+
+    // JEXL (Opzionale, utile per manipolazioni complesse)
+    config.jexlTransformations = {};
+
+    module.exports = config;
