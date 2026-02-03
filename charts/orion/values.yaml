@@ -304,6 +304,7 @@ mongo:
     tag: 4.0.24
   # -- port to make mongo accessible at
   port: 27017
+  size: 10Gi
 
 ## Configuration to enable/disable the test-container
 test:

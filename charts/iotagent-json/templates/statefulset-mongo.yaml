@@ -1,24 +1,24 @@
 {{- if .Values.mongo.enabled -}}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: {{ include "iotagent-manager.fullname" . }}-mongo
+  name: {{ include "iota-json.fullname" . }}-mongo
   namespace: {{ $.Release.Namespace | quote }}
   labels:
-    app.kubernetes.io/name: {{ include "iotagent-manager.name" . }}-mongo
-    helm.sh/chart: {{ include "iotagent-manager.chart" . }}
+    app.kubernetes.io/name: {{ include "iota-json.name" . }}-mongo
+    helm.sh/chart: {{ include "iota-json.chart" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "iotagent-manager.name" . }}-mongo
+      app.kubernetes.io/name: {{ include "iota-json.name" . }}-mongo
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "iotagent-manager.name" . }}-mongo
-        helm.sh/chart: {{ include "iotagent-manager.chart" . }}
+        app.kubernetes.io/name: {{ include "iota-json.name" . }}-mongo
+        helm.sh/chart: {{ include "iota-json.chart" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
         app.kubernetes.io/managed-by: {{ .Release.Service }}
     spec:
@@ -49,5 +49,13 @@ spec:
                 - |
                   mongo --eval 'db.runCommand("ping").ok' 127.0.0.1:27017/test && echo 0 || echo 1
             initialDelaySeconds: 5
-            periodSeconds: 5
+            periodSeconds: 5  
+  volumeClaimTemplates:
+    - metadata:
+        name: mongo-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: {{ .Values.mongo.size | default "8Gi" | quote }}
 {{- end }}

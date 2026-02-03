@@ -381,4 +381,5 @@ mongo:
   # -- port to make mongo accessible at
   port: 27017
   dbname: iotagent-json
+  size: 8Gi
   rsEnabled: false

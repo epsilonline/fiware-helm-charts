@@ -1,6 +1,6 @@
 {{- if .Values.mongo.enabled -}}
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: {{ include "orion.fullname" . }}-mongo
   namespace: {{ $.Release.Namespace | quote }}
@@ -10,13 +10,9 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name }}
     app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
+  serviceName: {{ include "orion.fullname" . }}-mongo
   {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.deployment.replicaCount }}
-  {{- end }}
-  revisionHistoryLimit: {{ .Values.deployment.revisionHistoryLimit }}
-  strategy:
-  {{- with .Values.deployment.updateStrategy }}
-  {{- toYaml . | nindent 4 }}
+  replicas: {{ .Values.deployment.replicaCount | default 1 }}
   {{- end }}
   selector:
     matchLabels:
@@ -26,29 +22,26 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: {{ include "orion.name" . }}-mongo
-        helm.sh/chart: {{ include "orion.chart" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
-        app.kubernetes.io/managed-by: {{ .Release.Service }}
         {{- with .Values.deployment.additionalLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-      {{ if .Values.deployment.additionalAnnotations -}}
-      annotations:
-        {{- with .Values.deployment.additionalAnnotations }}
-          {{- toYaml . | nindent 8 }}
-          {{- end }}
-      {{- end }}
     spec:
+      securityContext:
+        fsGroup: 999
       containers:
         - name: mongo-db
-          imagePullPolicy: {{ .Values.mongo.image.pullPolicy }}
           image: "{{ .Values.mongo.image.repository }}:{{ .Values.mongo.image.tag }}"
-          securityContext:
-            runAsUser: 999
+          imagePullPolicy: {{ .Values.mongo.image.pullPolicy }}
           ports:
             - name: mongo
-              containerPort: {{ .Values.mongo.port}}
+              containerPort: {{ .Values.mongo.port | default 27017 }}
               protocol: TCP
+          securityContext:
+            runAsUser: 999
+          volumeMounts:
+            - name: mongo-data
+              mountPath: /data/db
           livenessProbe:
             exec:
               command:
@@ -67,4 +60,15 @@ spec:
                   mongo --eval 'db.runCommand("ping").ok' 127.0.0.1:27017/test && echo 0 || echo 1
             initialDelaySeconds: 5
             periodSeconds: 5
+  volumeClaimTemplates:
+    - metadata:
+        name: mongo-data
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        # {{- if .Values.mongo.storageClass }}
+        # storageClassName: {{ .Values.mongo.storageClass | quote }}
+        # {{- end }}
+        resources:
+          requests:
+            storage: {{ .Values.mongo.size | default "8Gi" | quote }}
 {{- end }}
