@@ -362,7 +362,7 @@ deviceRegistry:
     # port of the mongodb
     port: 27017
     # name of the db used
-    dbName: iotagentul
+    dbName: iotagent-json
     # name of the replicaset, if used
     # replicaSet: dr
 
