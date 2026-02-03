@@ -332,7 +332,6 @@ iota:
   defaultTransport: HTTP
 
 
-
 ## Configuration for the IoT Manager. If the IoT Agent is part of a configuration composed of multiple IoTAgents
 ## coordinated by an IoT Manager, this section defines the information that will be used to connect with that
 ## manager.
