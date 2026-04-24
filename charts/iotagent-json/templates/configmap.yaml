@@ -230,7 +230,7 @@ data:
         /**
          * Textual description of this IoT Agent.
          */
-        description: 'MQTT Ultralight 2.0 IoT Agent (Node.js version)'
+        description: '{{ .Values.iotManager.description }}'
         },
 
         /**

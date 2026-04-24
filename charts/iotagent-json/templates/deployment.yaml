@@ -72,6 +72,12 @@ spec:
             successThreshold: {{ .Values.deployment.readinessProbe.successThreshold }}
             timeoutSeconds: {{ .Values.deployment.readinessProbe.timeoutSeconds }}
           env:
+            {{- if .Values.mqtt.broker.host }}
+            - name: IOTA_MQTT_HOST
+              value: {{ .Values.mqtt.broker.host }}
+            - name: IOTA_MQTT_PORT
+              value: {{ .Values.mqtt.broker.port }}
+            {{- end }}
             {{- if .Values.iota.authentication -}}
             {{- if eq .Values.iota.authentication.identityManager.type "keystone" -}}
             - name: IOTA_AUTH_USER
@@ -94,10 +100,6 @@ spec:
                   key: clientSecret
             {{- end }}
             {{- end }}
-            - name: IOTA_MQTT_HOST
-              value: "mosquitto.chirpstack.svc.cluster.local"
-            - name: IOTA_MQTT_PORT
-              value: "1883"
           resources:
             {{- toYaml .Values.deployment.resources | nindent 12 }}
           volumeMounts:
