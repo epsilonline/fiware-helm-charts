@@ -3864,6 +3864,17 @@ entries:
     urls:
     - https://github.com/FIWARE/helm-charts/releases/download/endpoint-auth-service-0.0.1/endpoint-auth-service-0.0.1.tgz
     version: 0.0.1
+  fiware-pep-proxy:
+  - apiVersion: v2
+    appVersion: 8.4.0
+    created: "2026-04-29T09:52:12.836725086Z"
+    description: FIWARE Wilma PEP Proxy
+    digest: 24f1c6d253a02994681b2f2e11ec521c8ff77cef7b12e375a128a388fb5f831c
+    name: fiware-pep-proxy
+    type: application
+    urls:
+    - https://github.com/epsilonline/fiware-helm-charts/releases/download/fiware-pep-proxy-0.1.0/fiware-pep-proxy-0.1.0.tgz
+    version: 0.1.0
   iotagent-json:
   - apiVersion: v1
     appVersion: 1.14.0
@@ -9037,4 +9048,4 @@ entries:
     urls:
     - https://github.com/FIWARE/helm-charts/releases/download/vcverifier-2.3.0/vcverifier-2.3.0.tgz
     version: 2.3.0
-generated: "2026-04-24T13:17:23.738203957Z"
+generated: "2026-04-29T09:52:12.837366365Z"
