@@ -1,0 +1,17 @@
+replicaCount: 1
+
+image:
+  repository: fiware/pep-proxy
+  tag: "8.4.0"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+# Manteniamo la porta perché è usata strutturalmente nel deployment.yaml per il containerPort
+pepProxy:
+  port: 8080
+
+# Inizializziamo l'array vuoto per permettere l'iniezione dinamica
+env: []

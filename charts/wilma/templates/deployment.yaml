@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "fiware-pep-proxy.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "fiware-pep-proxy.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "fiware-pep-proxy.name" . }}
+    spec:
+      containers:
+        - name: pep-proxy
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.pepProxy.port }}
+          env:
+            {{- if .Values.env }}
+            {{- toYaml .Values.env | nindent 12 }}
+            {{- end }}
+          livenessProbe:
+            httpGet:
+              path: /version
+              port: {{ .Values.pepProxy.port }}
