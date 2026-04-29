@@ -9051,6 +9051,16 @@ entries:
   wilma:
   - apiVersion: v2
     appVersion: 8.4.0
+    created: "2026-04-29T13:13:16.31793367Z"
+    description: FIWARE Wilma PEP Proxy
+    digest: 6fb467c2eb379a9a5a6cb2690e19f5633364b5211852571f19e522b2eefcc48a
+    name: wilma
+    type: application
+    urls:
+    - https://github.com/epsilonline/fiware-helm-charts/releases/download/wilma-0.1.1/wilma-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 8.4.0
     created: "2026-04-29T10:53:54.945734705Z"
     description: FIWARE Wilma PEP Proxy
     digest: 3581b502deebcd632770b26439fd96823dbd23dbe5c6db071db4adbfb9a1f7ff
@@ -9059,4 +9069,4 @@ entries:
     urls:
     - https://github.com/epsilonline/fiware-helm-charts/releases/download/wilma-0.1.0/wilma-0.1.0.tgz
     version: 0.1.0
-generated: "2026-04-29T10:53:54.946462986Z"
+generated: "2026-04-29T13:13:16.318624668Z"
