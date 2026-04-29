@@ -13,5 +13,17 @@ service:
 pepProxy:
   port: 8080
 
+ingress:
+  enabled: false
+  name: wilma-ingress
+  className: ""
+  annotations: {}
+  hosts:
+    - hosts:
+        - host: iot.epsilonlab.internal
+          paths:
+            - path: /api
+              pathType: Prefix
+
 # Inizializziamo l'array vuoto per permettere l'iniezione dinamica
 env: []
