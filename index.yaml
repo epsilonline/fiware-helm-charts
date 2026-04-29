@@ -9048,4 +9048,15 @@ entries:
     urls:
     - https://github.com/FIWARE/helm-charts/releases/download/vcverifier-2.3.0/vcverifier-2.3.0.tgz
     version: 2.3.0
-generated: "2026-04-29T09:52:12.837366365Z"
+  wilma:
+  - apiVersion: v2
+    appVersion: 8.4.0
+    created: "2026-04-29T10:53:54.945734705Z"
+    description: FIWARE Wilma PEP Proxy
+    digest: 3581b502deebcd632770b26439fd96823dbd23dbe5c6db071db4adbfb9a1f7ff
+    name: wilma
+    type: application
+    urls:
+    - https://github.com/epsilonline/fiware-helm-charts/releases/download/wilma-0.1.0/wilma-0.1.0.tgz
+    version: 0.1.0
+generated: "2026-04-29T10:53:54.946462986Z"
