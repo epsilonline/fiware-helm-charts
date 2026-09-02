@@ -3878,6 +3878,25 @@ entries:
   iotagent-json:
   - apiVersion: v1
     appVersion: 1.14.0
+    created: "2026-09-02T13:50:20.625413621Z"
+    description: A Helm chart for running the fiware iotagent-json on kubernetes.
+    digest: f8c95e523abc70d43ecb320355df007b0f11e3bca62a56100c1e194ab764c647
+    home: https://fiware-iotagent-json.readthedocs.io/en/latest/
+    icon: https://fiware.github.io/catalogue/img/fiware.png
+    keywords:
+    - fiware
+    - iot-agent
+    maintainers:
+    - email: t_sunny.malik@india.nec.com
+      name: Sunny Malik
+    name: iotagent-json
+    sources:
+    - https://github.com/telefonicaid/iotagent-json
+    urls:
+    - https://github.com/epsilonline/fiware-helm-charts/releases/download/iotagent-json-0.6.1/iotagent-json-0.6.1.tgz
+    version: 0.6.1
+  - apiVersion: v1
+    appVersion: 1.14.0
     created: "2026-04-24T13:17:23.737616566Z"
     description: A Helm chart for running the fiware iotagent-json on kubernetes.
     digest: 3a48ab78773169d08a3f1b3794fa46a3dd293920fd876bd3be7cf7cb116ee519
@@ -4116,6 +4135,26 @@ entries:
     - https://github.com/epsilonline/fiware-helm-charts/releases/download/iotagent-lorawan-0.1.0/iotagent-lorawan-0.1.0.tgz
     version: 0.1.0
   iotagent-manager:
+  - apiVersion: v2
+    appVersion: 3.9.0
+    created: "2026-09-02T13:50:22.077170746Z"
+    description: A Helm chart for running the fiware iotagent-manager on kubernetes.
+    digest: db210032968c7498f1637fdb9456455753a06c40be3cf6652cde5b977fef24f8
+    home: https://fiware-iotagent-manager.readthedocs.io/en/latest/
+    icon: https://fiware.github.io/catalogue/img/fiware.png
+    keywords:
+    - fiware
+    - iot-agent
+    maintainers:
+    - email: nicola.apa@epsilonline.com
+      name: Nicola Apa
+    name: iotagent-manager
+    sources:
+    - https://github.com/telefonicaid/iotagent-manager
+    type: application
+    urls:
+    - https://github.com/epsilonline/fiware-helm-charts/releases/download/iotagent-manager-0.1.1/iotagent-manager-0.1.1.tgz
+    version: 0.1.1
   - apiVersion: v2
     appVersion: 3.9.0
     created: "2026-02-03T17:12:26.033390567Z"
@@ -9079,4 +9118,4 @@ entries:
     urls:
     - https://github.com/epsilonline/fiware-helm-charts/releases/download/wilma-0.1.0/wilma-0.1.0.tgz
     version: 0.1.0
-generated: "2026-04-29T15:23:37.372216888Z"
+generated: "2026-09-02T13:50:22.080350637Z"
