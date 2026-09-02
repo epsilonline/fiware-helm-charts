@@ -1,0 +1,34 @@
+name: Deploy GitHub Pages
+
+on:
+  workflow_run:
+    workflows: ["Deploy"] 
+    types:
+      - completed
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy-pages:
+    runs-on: gha-runner-scale-set
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Checkout del branch gh-pages
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+
+      - name: Create files
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.' 
+
+      - name: Publish on GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
