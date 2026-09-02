@@ -10,7 +10,7 @@ jobs:
   # lint the charts
   lint:
 
-    runs-on: ubuntu-latest
+    runs-on: gha-runner-scale-set
     if: github.event_name == 'push'
 
     steps:
@@ -21,7 +21,7 @@ jobs:
 
   eval:
 
-    runs-on: ubuntu-latest
+    runs-on: gha-runner-scale-set
     needs:
       - lint
 
@@ -34,7 +34,7 @@ jobs:
           ./eval.sh
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: gha-runner-scale-set
     needs:
       - eval
 
